@@ -3,8 +3,6 @@ package com.ll;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,14 +14,8 @@ public class ApplicationTest {
         Scanner sc = TestUtil.genScanner("""
                 종료
                 """.stripIndent());
-        String input = sc.nextLine();
-
-        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
-        String out = byteArrayOutputStream.toString();
-
-        assertThat(input).isEqualTo("종료");
-        assertThat(out).isEqualTo("");
-        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+        new WiseController(sc).start();
+        sc.close();
     }
 
     @Test
@@ -35,18 +27,27 @@ public class ApplicationTest {
                 작자미상
                 종료
                 """.stripIndent());
-        ArrayList<String> input = new ArrayList<>(){{
-            for (int i = 0; i < 4; i++){
-                add(sc.nextLine());
-            }
-        }};
+        new WiseController(sc).start();
+        sc.close();
+    }
 
+    @Test
+    @DisplayName("3단계 : 등록시 생성된 명언번호 노출")
+    void t3() {
         ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
-        String out = byteArrayOutputStream.toString();
+        Scanner sc = TestUtil.genScanner("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                종료
+                """.stripIndent());
+        new WiseController(sc).start();
+        sc.close();
 
-        assertThat(input).isEqualTo(Arrays.asList("등록", "현재를 사랑하라.", "작자미상", "종료"));
-        assertThat(out).isEqualTo("");
+        String out = byteArrayOutputStream.toString();
+        assertThat(out).contains("1번 명언이 등록되었습니다.");
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
-}
 
+
+}
