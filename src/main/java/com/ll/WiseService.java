@@ -9,8 +9,6 @@ public class WiseService {
     /**
      * 생성할 명언 전달 to repository
      *
-     * @param content
-     * @param author
      * @return 생성한 명언 id 리턴 to controller
      */
     public int postWise(String content, String author) {
@@ -35,7 +33,23 @@ public class WiseService {
         return totalWiseList;
     }
 
-    public boolean deleteWise(int id){
+    public boolean deleteWise(int id) {
         return wiseRepository.deleteWise(id);
+    }
+
+    public String[] findWise(int id) {
+        int findIndex = wiseRepository.getWiseIndexById(id);
+        if (findIndex == -1) {
+            return null;
+        } else {
+            return new String[]{
+                    wiseRepository.getWiseList().get(findIndex).getContent(),
+                    wiseRepository.getWiseList().get(findIndex).getAuthor()
+            };
+        }
+    }
+
+    public void modifyWise(int id, String content, String author) {
+        wiseRepository.modifyWise(id, content, author);
     }
 }
