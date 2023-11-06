@@ -1,5 +1,6 @@
 package com.ll;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WiseController {
@@ -17,6 +18,9 @@ public class WiseController {
             String input = returnInput();
             if (input.equals("등록")){
                 postWise();
+            }
+            if (input.equals("목록")){
+                showWiseList();
             }
             if (input.equals("종료")){
                 isQuit = true;
@@ -37,5 +41,12 @@ public class WiseController {
 
         int id = wiseService.postWise(content, author);
         System.out.println(id+"번 명언이 등록되었습니다.");
+    }
+
+    public void showWiseList(){
+        System.out.println("번호 / 작가 / 명언");
+        System.out.println("----------------------");
+        ArrayList<String> totalWiseList = wiseService.getWiseList();
+        totalWiseList.forEach(System.out::println);
     }
 }
