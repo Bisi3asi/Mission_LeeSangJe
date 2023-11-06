@@ -4,7 +4,11 @@ import java.util.Scanner;
 
 public class WiseController {
     WiseService wiseService = new WiseService();
-    Scanner sc = new Scanner(System.in);
+    private final Scanner sc;
+
+    public WiseController(Scanner sc){
+        this.sc = sc;
+    }
 
     void start(){
         boolean isQuit = false;
@@ -25,11 +29,13 @@ public class WiseController {
         return sc.nextLine();
     }
 
-    void postWise(){
+    public void postWise(){
         System.out.print("명언 : ");
         String content = sc.nextLine();
         System.out.print("작가 : ");
         String author = sc.nextLine();
-        wiseService.postWise(content, author);
+
+        int id = wiseService.postWise(content, author);
+        System.out.println(id+"번 명언이 등록되었습니다.");
     }
 }
