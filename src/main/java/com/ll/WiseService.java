@@ -25,13 +25,17 @@ public class WiseService {
         List<Wise> wiseList = wiseRepository.getWiseList();
         ArrayList<String> totalWiseList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        for (int i = wiseList.size() - 1; i >= 0; i--) {
-            sb.append(wiseList.get(i).getId()).append(" / ")
-                    .append(wiseList.get(i).getAuthor()).append(" / ")
-                    .append(wiseList.get(i).getContent());
+        for (int index = wiseList.size() - 1; index >= 0; index--) {
+            sb.append(wiseList.get(index).getId()).append(" / ")
+                    .append(wiseList.get(index).getAuthor()).append(" / ")
+                    .append(wiseList.get(index).getContent());
             totalWiseList.add(sb.toString());
             sb.setLength(0);
         }
         return totalWiseList;
+    }
+
+    public boolean deleteWise(int id){
+        return wiseRepository.deleteWise(id);
     }
 }
