@@ -6,7 +6,9 @@ public class Wise {
     @Getter
     private final int id;
     private static int nextId = 1;
+    @Getter
     private final String content;
+    @Getter
     private final String author;
 
     Wise(String content, String author){
