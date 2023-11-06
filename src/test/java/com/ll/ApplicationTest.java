@@ -69,4 +69,27 @@ public class ApplicationTest {
         assertThat(out).contains("1번 명언이 등록되었습니다.", "2번 명언이 등록되었습니다.");
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
+
+    @Test
+    @DisplayName("5단계 : 목록")
+    void t5() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+        Scanner sc = TestUtil.genScanner("""
+                등록
+                현재를 사랑해라.
+                작자미상
+                등록
+                과거에 집착하지 마라.
+                작자미상
+                목록
+                종료
+                """.stripIndent());
+        new WiseController(sc).start();
+        sc.close();
+
+        String out = byteArrayOutputStream.toString();
+        assertThat(out).contains("1번 명언이 등록되었습니다.", "2번 명언이 등록되었습니다.", "번호 / 작가 / 명언"
+        , "----------------------", " 2 / 작가미상 / 과거에 집착하지 마라.", "1 / 작가미상 / 현재를 사랑해라.");
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+    }
 }
