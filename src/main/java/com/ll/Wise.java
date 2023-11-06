@@ -1,11 +1,18 @@
 package com.ll;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
 public class Wise {
-    final private String content;
-    final private String author;
+    @Getter
+    private final int id;
+    private static int nextId = 1;
+    private final String content;
+    private final String author;
+
+    Wise(String content, String author){
+        this.content = content;
+        this.author = author;
+        this.id = nextId;
+        nextId++;
+    }
 }
