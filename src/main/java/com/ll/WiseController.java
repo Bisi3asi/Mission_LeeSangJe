@@ -26,7 +26,11 @@ public class WiseController {
                 int id = Integer.parseInt(input.substring(6));
                 deleteWise(id);
             }
-            if (input.equals("종료")){
+            if (input.matches("수정\\?id=\\d+")) {
+                int id = Integer.parseInt(input.substring(6));
+                modifyWise(id);
+            }
+            if (input.equals("종료")) {
                 isQuit = true;
             }
         }
@@ -61,6 +65,23 @@ public class WiseController {
         }
         if (!result){
             System.out.println(id + "번 명언은 존재하지 않습니다.");
+        }
+    }
+
+    public void modifyWise(int id) {
+        // findResult = {"기존 명언", "기존 작가"}
+        String[] findResult = wiseService.findWise(id);
+
+        if (findResult == null) {
+            System.out.println(id + "번 명언은 존재하지 않습니다.");
+        } else {
+            System.out.println("명언(기존) : " + findResult[0]);
+            System.out.print("명언 : ");
+            String content = sc.nextLine();
+            System.out.println("작가(기존) : " + findResult[1]);
+            System.out.print("작가 : ");
+            String author = sc.nextLine();
+            wiseService.modifyWise(id, content, author);
         }
     }
 }
