@@ -22,6 +22,10 @@ public class WiseController {
             if (input.equals("목록")){
                 showWiseList();
             }
+            if (input.matches("삭제\\?id=\\d+")){
+                int id = Integer.parseInt(input.substring(6));
+                deleteWise(id);
+            }
             if (input.equals("종료")){
                 isQuit = true;
             }
@@ -48,5 +52,15 @@ public class WiseController {
         System.out.println("----------------------");
         ArrayList<String> totalWiseList = wiseService.getWiseList();
         totalWiseList.forEach(System.out::println);
+    }
+
+    public void deleteWise(int id){
+        boolean result = wiseService.deleteWise(id);
+        if (result) {
+            System.out.println(id + "번 명언이 삭제되었습니다.");
+        }
+        if (!result){
+            System.out.println(id + "번 명언은 존재하지 않습니다.");
+        }
     }
 }
