@@ -1,7 +1,7 @@
 package com.ll;
 
 public class Application {
-    WiseController wiseController = new WiseController();
+    WiseController wiseController = new WiseController(new Scanner(System.in));
 
     public void boot(){
         wiseController.start();

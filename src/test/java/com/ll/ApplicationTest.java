@@ -49,5 +49,24 @@ public class ApplicationTest {
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
 
+    @Test
+    @DisplayName("4단계 : 등록할때 마다 생성되는 명언번호가 증가")
+    void t4() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+        Scanner sc = TestUtil.genScanner("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                현재를 사랑하라.
+                작자미상
+                종료
+                """.stripIndent());
+        new WiseController(sc).start();
+        sc.close();
 
+        String out = byteArrayOutputStream.toString();
+        assertThat(out).contains("1번 명언이 등록되었습니다.", "2번 명언이 등록되었습니다.");
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+    }
 }
