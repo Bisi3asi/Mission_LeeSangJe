@@ -139,4 +139,30 @@ public class ApplicationTest {
         assertThat(out).contains("1번 명언이 삭제되었습니다.", "1번 명언은 존재하지 않습니다.");
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
+
+    @Test
+    @DisplayName("8단계 : 명언수정")
+    void t8() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+        Scanner sc = TestUtil.genScanner("""
+                등록
+                현재를 사랑해라.
+                작자미상
+                등록
+                과거에 집착하지 마라.
+                작자미상
+                목록
+                수정?id=2
+                현재와 자신을 사랑하라.
+                홍길동
+                목록
+                종료
+                """.stripIndent());
+        new WiseController(sc).start();
+        sc.close();
+
+        String out = byteArrayOutputStream.toString();
+        assertThat(out).contains("2 / 홍길동 / 현재와 자신을 사랑하라.");
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+    }
 }
