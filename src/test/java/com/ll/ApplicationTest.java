@@ -92,4 +92,27 @@ public class ApplicationTest {
                 "2 / 작자미상 / 과거에 집착하지 마라.", "1 / 작자미상 / 현재를 사랑해라.");
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
+
+    @Test
+    @DisplayName("6단계 : 명언삭제")
+    void t6() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+        Scanner sc = TestUtil.genScanner("""
+                등록
+                현재를 사랑해라.
+                작자미상
+                등록
+                과거에 집착하지 마라.
+                작자미상
+                목록
+                삭제?id=1
+                종료
+                """.stripIndent());
+        new WiseController(sc).start();
+        sc.close();
+
+        String out = byteArrayOutputStream.toString();
+        assertThat(out).contains("1번 명언이 삭제되었습니다.");
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+    }
 }
