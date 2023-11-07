@@ -1,5 +1,7 @@
 package com.ll;
 
+import java.util.Scanner;
+
 public class Application {
     WiseController wiseController = new WiseController(new Scanner(System.in));
 

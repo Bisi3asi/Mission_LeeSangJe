@@ -41,12 +41,11 @@ public class WiseService {
         int findIndex = wiseRepository.getWiseIndexById(id);
         if (findIndex == -1) {
             return null;
-        } else {
-            return new String[]{
-                    wiseRepository.getWiseList().get(findIndex).getContent(),
-                    wiseRepository.getWiseList().get(findIndex).getAuthor()
-            };
         }
+        return new String[]{
+                wiseRepository.getWiseList().get(findIndex).getContent(),
+                wiseRepository.getWiseList().get(findIndex).getAuthor()
+        };
     }
 
     public void modifyWise(int id, String content, String author) {
