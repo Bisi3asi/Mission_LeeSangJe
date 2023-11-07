@@ -11,7 +11,7 @@ public class WiseController {
         this.sc = sc;
     }
 
-    void start() {
+    public void start() {
         boolean isQuit = false;
         System.out.println("== 명언 앱 == ");
         while (!isQuit) {
@@ -36,7 +36,7 @@ public class WiseController {
         }
     }
 
-    String returnInput() {
+    public String returnInput() {
         System.out.print("명령) ");
         return sc.nextLine();
     }
@@ -52,8 +52,7 @@ public class WiseController {
     }
 
     public void showWiseList() {
-        System.out.println("번호 / 작가 / 명언");
-        System.out.println("----------------------");
+        System.out.println("번호 / 작가 / 명언\n----------------------\n");
         ArrayList<String> totalWiseList = wiseService.getWiseList();
         totalWiseList.forEach(System.out::println);
     }
@@ -63,7 +62,8 @@ public class WiseController {
 
         if (!isvalid) {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
-        } else {
+        }
+        if (isvalid) {
             System.out.println(id + "번 명언이 삭제되었습니다.");
         }
     }
@@ -74,12 +74,11 @@ public class WiseController {
 
         if (findResult == null) {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
-        } else {
-            System.out.println("명언(기존) : " + findResult[0]);
-            System.out.print("명언 : ");
+        }
+        if (findResult != null) {
+            System.out.print("명언(기존) : " + findResult[0] + "\n명언 : ");
             String content = sc.nextLine();
-            System.out.println("작가(기존) : " + findResult[1]);
-            System.out.print("작가 : ");
+            System.out.println("작가(기존) : " + findResult[1] + "\n작가 : ");
             String author = sc.nextLine();
             wiseService.modifyWise(id, content, author);
         }
