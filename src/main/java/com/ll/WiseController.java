@@ -14,6 +14,8 @@ public class WiseController {
     public void start() {
         boolean isQuit = false;
         System.out.println("== 명언 앱 == ");
+        readWise();
+
         while (!isQuit) {
             String input = returnInput();
             if (input.equals("등록")) {
@@ -30,8 +32,12 @@ public class WiseController {
                 int id = Integer.parseInt(input.substring(6));
                 modifyWise(id);
             }
+            if (input.equals("빌드")) {
+                buildWise();
+            }
             if (input.equals("종료")) {
                 isQuit = true;
+                saveWise();
             }
         }
     }
@@ -81,6 +87,26 @@ public class WiseController {
             System.out.println("작가(기존) : " + findResult[1] + "\n작가 : ");
             String author = sc.nextLine();
             wiseService.modifyWise(id, content, author);
+        }
+    }
+
+    public void saveWise() {
+        if (wiseService.saveWise().equals("ERROR")) {
+            System.out.println("[ERROR] : SAVE FAILED");
+        }
+    }
+
+    public void readWise() {
+        wiseService.readWise();
+    }
+
+    public void buildWise() {
+        String savePath = wiseService.saveWise();
+        if (savePath.equals("ERROR")) {
+            System.out.println("[ERROR] : SAVE FAILED");
+        }
+        if (!savePath.equals("ERROR")) {
+            System.out.println(savePath + " 파일의 내용이 갱신되었습니다.");
         }
     }
 }
