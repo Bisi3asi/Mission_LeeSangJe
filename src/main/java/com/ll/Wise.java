@@ -1,9 +1,7 @@
 package com.ll;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class Wise {
     private static int nextId = 1;
     @Getter
@@ -12,6 +10,14 @@ public class Wise {
     private final String content;
     @Getter
     private final String author;
+
+    Wise(int id, String content, String author){
+        this.content = content;
+        this.author = author;
+        this.id = id;
+        // 파일 영속성(불러오기) 이후 등록 시
+        if (nextId <= id) nextId = id + 1;
+    }
 
     Wise(String content, String author){
         this.content = content;
