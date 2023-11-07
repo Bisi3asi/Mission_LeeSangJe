@@ -165,4 +165,20 @@ public class ApplicationTest {
         assertThat(out).contains("2 / 홍길동 / 현재와 자신을 사랑하라.");
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
+
+    @Test
+    @DisplayName("9단계 : 파일을 통한 영속성")
+    void t9() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+        Scanner sc = TestUtil.genScanner("""
+                목록
+                종료
+                """.stripIndent());
+        new WiseController(sc).start();
+        sc.close();
+
+        String out = byteArrayOutputStream.toString();
+        assertThat(out).isNotEmpty();
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+    }
 }
