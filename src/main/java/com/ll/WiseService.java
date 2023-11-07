@@ -55,4 +55,12 @@ public class WiseService {
     public void modifyWise(int id, String content, String author) {
         wiseRepository.modifyWise(id, content, author);
     }
+
+    public String saveWise(){
+        return wiseRepository.saveWise();
+    }
+
+    public boolean readWise(){
+        return wiseRepository.readWise();
+    }
 }
