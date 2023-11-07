@@ -3,6 +3,7 @@ package com.ll;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class WiseService {
     WiseRepository wiseRepository = new WiseRepository();
 
@@ -12,8 +13,7 @@ public class WiseService {
      * @return 생성한 명언 id 리턴 to controller
      */
     public int postWise(String content, String author) {
-        int id = wiseRepository.postWise(content, author);
-        return id;
+        return wiseRepository.postWise(content, author);
     }
 
     /**
@@ -23,6 +23,7 @@ public class WiseService {
         List<Wise> wiseList = wiseRepository.getWiseList();
         ArrayList<String> totalWiseList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
+
         for (int index = wiseList.size() - 1; index >= 0; index--) {
             sb.append(wiseList.get(index).getId()).append(" / ")
                     .append(wiseList.get(index).getAuthor()).append(" / ")
@@ -33,6 +34,9 @@ public class WiseService {
         return totalWiseList;
     }
 
+    /**
+     * @return 삭제 성공 시 true / 실패 시 false 리턴
+     */
     public boolean deleteWise(int id) {
         return wiseRepository.deleteWise(id);
     }
