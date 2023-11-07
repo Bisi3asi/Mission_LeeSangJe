@@ -33,10 +33,9 @@ public class WiseRepository {
         int deleteIndex = getWiseIndexById(id);
         if (deleteIndex == -1) {
             return false;
-        } else {
-            wiseList.remove(deleteIndex);
-            return true;
         }
+        wiseList.remove(deleteIndex);
+        return true;
     }
 
     public void modifyWise(int id, String content, String author){
