@@ -178,7 +178,24 @@ public class ApplicationTest {
         sc.close();
 
         String out = byteArrayOutputStream.toString();
-        assertThat(out).isNotEmpty();
+        assertThat(out).matches("\\d+");
+        TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
+    }
+
+    @Test
+    @DisplayName("10단계 : data.json 빌드")
+    void t10() {
+        ByteArrayOutputStream byteArrayOutputStream = TestUtil.setOutToByteArray();
+        Scanner sc = TestUtil.genScanner("""
+                목록
+                빌드
+                종료
+                """.stripIndent());
+        new WiseController(sc).start();
+        sc.close();
+
+        String out = byteArrayOutputStream.toString();
+        assertThat(out).contains("파일의 내용이 갱신되었습니다.");
         TestUtil.clearSetOutToByteArray(byteArrayOutputStream);
     }
 }
