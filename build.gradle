@@ -18,6 +18,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'com.mysql:mysql-connector-j:8.2.0'
 }
 
 test {
