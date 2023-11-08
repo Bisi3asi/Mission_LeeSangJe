@@ -1,12 +1,12 @@
+package com.ll;
+
 import java.util.Scanner;
 
 public class Application {
-    Scanner sc = new Scanner(System.in);
+    WiseController wiseController = new WiseController(new Scanner(System.in));
 
-    void boot(){
-        System.out.println(" == 명언 앱 ==");
-        System.out.print("명령) ");
-        sc.nextLine();
+    public void boot(){
+        wiseController.start();
     }
 
     public static void main(String[] args) {
