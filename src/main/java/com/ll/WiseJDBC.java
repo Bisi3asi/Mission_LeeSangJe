@@ -1,20 +1,45 @@
 package com.ll;
 
 import java.sql.*;
+import java.util.List;
 
 public class WiseJDBC {
-    Connection connection;
-    void execute() {
+    public static Connection connection;
+
+    public static void execute() {
         try {
             // JDBC 설정
-            String url = "jdbc:mysql://localhost:3306/WiseDB";
+            String url = "jdbc:mysql://localhost:3306/wisedb";
             String username = "root";
             String password = "lldj123414";
             connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("USE WISE");
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static boolean saveWise(List<Wise> wiseList) {
+        int rowsAffected = 0;
+
+        try {
+            for (Wise wise : wiseList) {
+                int id = wise.getId();
+                String content = wise.getContent();
+                String author = wise.getAuthor();
+                Statement statement = connection.createStatement();
+                rowsAffected = statement.executeUpdate("INSERT INTO wise"+
+                        "(id, createDate, content, author)" +
+                        " VALUES (" + id + " , NOW(), '" + content + "' , '" + author + "')");
+            }
+            if (rowsAffected > 0) {
+                System.out.println("데이터 저장에 성공했습니다");
+                return true;
+            } else {
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
