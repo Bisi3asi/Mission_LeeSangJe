@@ -37,7 +37,8 @@
 
 ```
 1. 아쉬웠던 점 / 궁금했던 점
-  1) JDBC에 대한 환경설정 
+  1) JDBC 관련 환경설정
+  2) JDBC 활용 CRUD 구현 시 id 중복여부 확인을 통한 CREATE / UPDATE 판별법 
 
 1. 참고 : [Refactoring] 
   1) 스트림을 활용한 리팩토링
